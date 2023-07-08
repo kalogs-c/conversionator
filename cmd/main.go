@@ -8,8 +8,8 @@ import (
 	"github.com/kalogs-c/turbosizenator/img"
 )
 
-//export ResizeImageFromFilePath
-func ResizeImageFromFilePath(fpath *C.char, destination *C.char, target *C.char) {
+//export ConvertImageFromFilePath
+func ConvertImageFromFilePath(fpath *C.char, destination *C.char, target *C.char) {
 	targetFormat := img.GetImageFormat(C.GoString(target))
 	imagePath := C.GoString(fpath)
 	destinationPath := C.GoString(destination)
