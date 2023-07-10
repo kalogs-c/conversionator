@@ -5,3 +5,6 @@ build-lib:
 
 build-c: ./C/main.c ./C/turbosizenator.h
 	gcc ./C/main.c -L. ./C/$(PROJECT) -o ./C/dist/$(PROJECT)
+
+rb:
+	ruby ./Ruby/ffi.rb
