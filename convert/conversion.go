@@ -3,6 +3,7 @@ package convert
 import (
 	"bytes"
 	"io"
+	"log"
 	"os"
 
 	"github.com/kalogs-c/turbosizenator/img"
@@ -52,17 +53,19 @@ func FromReaderAndSave(r io.Reader, destination string, target img.ImageFormat) 
 	return nil
 }
 
-func FromReader(r io.Reader, target img.ImageFormat) (io.Reader, error) {
+func FromReader(r io.Reader, target img.ImageFormat) (*bytes.Buffer, error) {
 	image, err := img.ReadImage(r)
 	if err != nil {
+		log.Fatalf("error while reading the image %s\n", err.Error())
 		return nil, err
 	}
 
 	buffer := bytes.NewBuffer([]byte{})
 	err = img.WriteImage(image, buffer, target)
 	if err != nil {
+		log.Fatalf("error while writing the image %s\n", err.Error())
 		return nil, err
 	}
 
-	return bytes.NewReader(buffer.Bytes()), nil
+	return buffer, nil
 }
